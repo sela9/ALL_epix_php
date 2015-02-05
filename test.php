@@ -98,5 +98,5 @@ echo '</table>';
 $hello = 'Hello, you';
 
 var_dump($hello);
-
+echo '<br>';
 print_r($hello);
