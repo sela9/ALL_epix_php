@@ -76,8 +76,8 @@ $pricat = [
 foreach ($pricat as $product => $key) {
 echo '<ul>';
 	echo '<li>';
-	echo $product['name'];
-	echo '<a href="?id='. $key .' ">В корзину</a>';
+	echo ($pricat[$product]['name']);
+	echo '<a href="?id='. $product .' ">В корзину</a>';
 	echo '</li>';
 echo '</ul>';
 }

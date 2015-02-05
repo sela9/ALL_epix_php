@@ -84,7 +84,7 @@ echo '<table border=2>';
         echo '<td>' . $pricat[$list]['description'] . '</td></tr>';
         echo '<tr><td> Стоимость </td>';
         echo '<td>' . $pricat[$list]['price'] . '</td></tr>';
-        echo '<tr><td>Укажите количество: <form action = "index.php?page=content&list='.$list.' " method = "post"><p><input name='.$pricat[$list].'></p>';
+        echo '<tr><td>Укажите количество: <form action = "index.php?page=content&list='.$pricat[$list].' " method = "post"><p><input name='.$pricat[$list].'></p>';
         echo '<p><input type="submit"></p>';
         echo '</form></td><td> Страна - Производитель </td>';
         echo '<td>' . $pricat[$list]['country'] . '</td></tr>';
