@@ -28,7 +28,7 @@ foreach ($rows as $key => $row) {
 	echo "<td>".$row['description']."</td>";
 	echo "<td>".$row['price']."</td>";
 	echo "<td>".$row['type']."</td>";
-	echo "<td><a href='index.php?action=delete&id=".$row['id']."'>Удалить</a></td>";
+	echo "<td><a href='index.php?action=delete&id=".$row['id']."' style = 'background-color:none'>Удалить</a></td>";
 	echo "<td><a href='index.php?action=edit&id=".$row['id']."'>Изменить</a></td>";
 	echo "</tr>";
 }

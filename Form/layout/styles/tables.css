@@ -14,3 +14,5 @@ table tbody td{vertical-align:top; border-collapse:collapse; border-left:1px sol
 table thead th, table tbody td{padding:5px; border-collapse:collapse;}
 table tbody tr.light{color:#666666; background-color:#F7F7F7;}
 table tbody tr.dark{color:#666666; background-color:#E8E8E8;}
+table tbody a{display:block; margin:0; padding:5px 10px 5px 20px; color:#294E79; no-repeat 10px center #F9F9F9; text-decoration:none; border-bottom:1px dotted #666666;}
+table tbody a:hover{color:#FFC12E; background-color:#F9F9F9;}

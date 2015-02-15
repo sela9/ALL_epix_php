@@ -17,17 +17,45 @@ if (!empty($_GET['id'])) {
 }
 ?>
 
-<form method="post" action="">
-    <div>Title<input type="text" name="title" value="<?=$row['title'];?>" /></div>
-    <div>Description<input type="text" name="description" value="<?=$row['description'];?>" /></div>
-    <div>Price<input type="text" name="price" value="<?=$row['price'];?>" /></div>
-    <div>Type<input type="text" name="type" value="<?=$row['type'];?>"></textarea></div>
-    <div><input type="submit" value="Переписать в БАЗЕ!!" /></div>
-</form>
+<div class="wrapper col4">
+  <div id="container">
+    <div id="content">
+    <h2>Изменить запись в каталоге</h2>
+      <div id="respond">
+        <form action="" method="post">
+          <p>
+            <label for="title"><small>Title</small></label>
+            <input type="text" name="title" value="<?=$row['title'];?>" size="22" />
+          </p>
+          <p>
+            <label for="description"><small>Description</small></label>
+            <input name="description" value="<?=$row['description'];?>" cols="100%" rows="2"></textarea>
+          </p>
+          <p>
+            <label for="type"><small>Type</small></label>
+            <input type="text" name="type" value="<?=$row['type'];?>" size="22" />
+          </p>
+          <p>
+            <label for="price"><small>Price</small></label>
+            <input type="text" name="price" value="<?=$row['price'];?>" size="22" />
+          </p>
+          <p>
+            <input name="submit" type="submit" value="Изменить в БАЗЕ!!!"/>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php
 if (!empty($_POST)) {
-     $edit = "UPDATE products SET price = ".$_POST['price']." WHERE id = ".$row['id']." ";
+     $edit = "UPDATE products SET 
+                        title = '".$_POST['title']."',
+                        price = '".$_POST['price']."',
+                        description = '".$_POST['description']."',
+                        type = '".$_POST['type']."'                        
+                    WHERE id = ".$row['id']."; ";
      $stmt = $pdo->exec($edit);
      echo '<meta http-equiv="refresh" content="0">';
 }

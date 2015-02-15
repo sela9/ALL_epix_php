@@ -9,7 +9,7 @@
 <div class="wrapper col2">
   <div id="header">
     <div id="logo">
-      <h1><a href="index.html">Каталог</a></h1>
+      <h1><a href="index.php">Каталог</a></h1>
       <p>Товары для девушек в тренде</p>
     </div>
     <div id="topnav">
@@ -42,5 +42,12 @@ $pdo->setAttribute(
 );
 include $action . '.php';
 ?>
+<div class="wrapper col6">
+  <div id="copyright">
+    <p class="fl_left">Copyright &copy; 2015  <a href="#">  EPICPHP</a></p>
+    <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <br class="clear" />
+  </div>
+</div>
 </body>
 </html>
