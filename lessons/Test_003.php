@@ -87,7 +87,21 @@ if (is_numeric($id)&&$id<count($pricat)) {
 	$_SESSION['pricat'][$id]=$pricat[$id];
 }
 
-var_dump ($_SESSION);
+//var_dump ($_SESSION);
 
 echo "<h2>Корзина<h2>";
+foreach ($_SESSION as $product => $key) {
+    foreach ($key as $k => $v) {
+        echo '<ul>';
+        	echo '<li>';
+            echo ($v["name"]);
+        	echo '<a href="?id_del='. $k .' ">Удалить из корзины</a>';
+        	echo '</li>';
+        echo '</ul>';
+    }
+}
 
+$id_del = isset($_GET['id_del']) ? $_GET['id_del'] : null;
+if (is_numeric($id_del)&&$id_del<count($pricat)) {
+    unset($_SESSION['pricat'][$id_del]);
+}

@@ -2,10 +2,8 @@
 
 require_once 'header.php';
 
-var_dump($_COOKIE);
-
-if (isset($_COOKIE['user'])) {
+if (isset($_COOKIE["name"])) {
 	require_once 'blog.php';
-} else {require_once 'auth.php';}
+} else {echo '<br><a href=auth.php>Авторизоваться</a>';}
 
 require_once 'footer.php';
