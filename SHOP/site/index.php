@@ -1,10 +1,7 @@
 <?php
 
-//Топ 4 товара
-//Распродажа
-//Количество товаров в корзине
 
-$actions = ['index', 'shop'];
+//$actions = ['index', 'shop'];
 //$action = isset($_GET['page']) ? $_GET['page'] : 'index';
 //if (!in_array($action, $actions)) { 
 //    exit('Something about 404...');
@@ -20,6 +17,16 @@ $pdo->setAttribute(
     PDO::ATTR_ERRMODE, 
     PDO::ERRMODE_EXCEPTION
 );
+//Запрос сумок с самой низкой распродажной ценой
+$home = "SELECT products.id, products.name, products.price, products.price_sale, images.color, images.link 
+         FROM products 
+    	 LEFT JOIN images ON products.id=images.id_product
+    	 WHERE products.price_sale !='0' AND images.color !=''
+    	 ORDER BY products.price_sale
+    	 LIMIT 8 ";
+$st=$pdo->prepare($home);
+$st->execute();
+$stmt = $st->fetchAll(PDO::FETCH_ASSOC);
 
 include_once '../elements/header.html';
 include_once 'index.html';

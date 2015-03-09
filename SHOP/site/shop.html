@@ -3,8 +3,14 @@
       <div id="shop">
         <ul class="items">
 <?php
+//Вывод результатов поиска по фильтру
+
+$equal=array(); //чтобы не выводить повторы
+$border = 1;    //чтобы выводить по 4 
 foreach ($stmt as $key => $value) {
-     if (!(($key+1)%4)) {
+     if (in_array($value['id'], $equal)) { continue;
+     } else $equal[]=$value["id"];
+     if (!($border%4)) {
           echo "<li class='last'>";
      } else {echo '<li>';
        }
@@ -16,29 +22,14 @@ foreach ($stmt as $key => $value) {
      } else echo "<span class='price'>".$value["price"]."</span>";
      echo "<br>";
      echo '</li>';
-
-
-  
+     $border++;
 }
 
 
 ?>
 
 <!-- 
-          <li> <span><img src="../images/9061_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
-          <li> <span><img src="../images/9525_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
-          <li> <span><img src="../images/9790_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
-          <li class="last"> <span><img src="../images/34448_liblk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
-          <li> <span><img src="../images/9927_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
-          <li> <span><img src="../images/9951_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
-          <li> <span><img src="../images/9966_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
+         
           <li class="last"> <span><img src="../images/34426_liblk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
             <a href="#" class="buy">Buy</a> </li>
 

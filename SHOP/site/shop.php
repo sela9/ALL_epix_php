@@ -41,7 +41,7 @@ function addWhere($where, $add, $and = true) {
   } else $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.color, images.link FROM products 
   					INNER JOIN images ON products.id=images.id_product
     			    INNER JOIN material ON products.material=material.id";
- var_dump($filter);
+// var_dump($filter);
 
 
 //получаем каталог из БД

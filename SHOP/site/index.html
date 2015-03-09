@@ -1,15 +1,38 @@
     <div id="contents">
       <div id="main">
-        <div id="adbox"> <img src="../images/sale.jpg" alt=""> </div>
+        <div id="adbox"> <img src="../images/sales.jpg" alt=""> </div>
       </div>
+    </div>
+    <div id="contents">
       <div id="featured">
         <ul>
+<?php
+$equal=array();
+foreach ($stmt as $key => $value) {
+     if (in_array($value['id'], $equal)) { continue;
+     } else $equal[]=$value["id"];
+     if (!(($key+1)%4)) {
+          echo "<li class='last'>";
+     } else {echo '<li>';
+       }
+     echo "<img src='../images/".$value["link"]."' alt='' height='253px' width='204px'";
+     echo "<del>".$value['price']."</del>=>".$value['price_sale'];
+     echo "<br>";
+     echo '</li>';
+
+
+  
+}
+
+
+?>
+<!--          
           <li><img src="../images/shirt-red.jpg" alt=""></li>
           <li><img src="../images/shirt-orange.jpg" alt=""></li>
           <li><img src="../images/shirt-green.jpg" alt=""></li>
-          <li class="last"><img src="../images/shirt-blue.jpg" alt=""></li>
+          <li class="last"><img src="../images/shirt-blue.jpg" alt=""></li>-->
         </ul>
-        <a href="shop.html" class="button">Shop here!</a> </div>
+        <a href="shop.php" class="button">Shop here!</a> </div>
     </div>
     <!-- /#contents -->
 
