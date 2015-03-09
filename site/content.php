@@ -84,7 +84,7 @@ echo '<table border=2>';
         echo '<td>' . $pricat[$list]['description'] . '</td></tr>';
         echo '<tr><td> Стоимость </td>';
         echo '<td>' . $pricat[$list]['price'] . '</td></tr>';
-        echo '<tr><td>Укажите количество: <form action = "index.php?page=content&list='.$pricat[$list].' " method = "post"><p><input name='.$pricat[$list].'></p>';
+        echo '<tr><td>Укажите количество: <form action = "index.php?page=content&list='.$list.' " method = "post"><p><input name='.$list.'></p>';
         echo '<p><input type="submit"></p>';
         echo '</form></td><td> Страна - Производитель </td>';
         echo '<td>' . $pricat[$list]['country'] . '</td></tr>';
@@ -97,10 +97,28 @@ echo '</table>';             }
 print_items ($pricat, $list*2);
 print_items ($pricat, $list*2+1);
 
+Class Pag {
+    public $pages;
+    public function __construct ($pages) {
+        $this->pages=$pages;
+    }
+    public function printpage() {
+        for ($i=0; $i < $this->pages; $i++) {
+            echo "<a href=index.php?page=content&list=".$i.">" .$i. "</a>";
+        }
 
-for ($i=0; $i < ($q/2) ; $i++) { 
-	echo '<A HREF="index.php?page=content&list='.$i.'">  '.($i+1).'  </A>';
+    } 
+
+
 }
-var_dump($_POST);
+
+$paginator = new Pag ($q/2);
+$paginator->printpage();
+
+/*for ($i=0; $i < ($q/2) ; $i++) { 
+	echo '<A HREF="index.php?page=content&list='.$i.'">  '.($i+1).'  </A>';
+}*/
+
+//var_dump($_POST);
 echo '<br>';
 echo '<A HREF="index.php">Вернуться на главную</A>';
