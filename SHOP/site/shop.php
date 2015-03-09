@@ -1,73 +1,18 @@
-<!-- Вывод фильтра -->
-<form name="form" action="" method="post">
-  <table>
-    <tr>
-      <td>Цена от:</td>
-      <td><input type="text" name="price_start" /> рублей</td>
-    </tr>
-    <tr>
-      <td>Цена до:</td>
-      <td><input type="text" name="price_end" /> рублей</td>
-    </tr>
-    <tr>
-      <td colspan="2"><h4>Цвет</h4></td>
-    </tr>
-    <tr>
-      <td>Черный</td>
-      <td>
-        <input type="checkbox" name="colors[]" value="black" />
-      </td>
-    </tr>
-    <tr>
-      <td>Коричневый</td>
-      <td>
-        <input type="checkbox" name="colors[]" value="brown" />
-      </td>
-    </tr>
-    <tr>
-      <td>Белый</td>
-      <td>
-        <input type="checkbox" name="colors[]" value="white" />
-      </td>
-    </tr>
-   <tr>
-      <td colspan="2"><h4>Материал</h4></td>
-    </tr>
-    <tr>
-      <td>Кожа</td>
-      <td>
-        <input type="checkbox" name="material[]" value="leather" />
-      </td>
-    </tr>
-    <tr>
-      <td>Искуственная кожа</td>
-      <td>
-        <input type="checkbox" name="material[]" value="not_leather" />
-      </td>
-    </tr>
-    <tr>
-      <td>Ткань</td>
-      <td>
-        <input type="checkbox" name="material[]" value="cloth" />
-      </td>
-    </tr>
-    <tr>
-      <td>Со скидкой</td>
-      <td>
-        <input type="checkbox" name="sale"/>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <input type="submit" name="filter" value="Подобрать сумочки" />
-      </td>
-    </tr>
-  </table>
-</form>
-
-
-
 <?php
+include_once "../elements/header.html";
+include_once "../elements/filter.html";
+
+//Подключение БД
+$pdo = new PDO(
+    'mysql:host=localhost;dbname=handbags;charset=utf8', 
+    'root', 
+    ''
+);
+$pdo->setAttribute(
+    PDO::ATTR_ERRMODE, 
+    PDO::ERRMODE_EXCEPTION
+);
+
 
 //функция формирования запроса по данным из фильтра
 function addWhere($where, $add, $and = true) {
@@ -83,26 +28,31 @@ function addWhere($where, $add, $and = true) {
 
   if (!empty($_POST["filter"])) {
     $where = "";
-    if ($_POST["price_start"]) $where = addWhere($where, "price >=".htmlspecialchars($_POST["price_start"]));
-    if ($_POST["price_end"]) $where = addWhere($where, "price <=".htmlspecialchars($_POST["price_end"]));
-    if ($_POST["colors"]) $where = addWhere($where, "colors IN (".htmlspecialchars(implode(",", $_POST["colors"])).")");
-    if ($_POST["material"]) $where = addWhere($where, "material IN (".htmlspecialchars(implode(",", $_POST["material"])).")");
-    if ($_POST["sale"]) $where = addWhere($where, "sale = '1'");
-    $filter = "SELECT * FROM products ";
-    if ($where) $filter .= "WHERE $where";
+    if ($_POST["price_start"]) $where = addWhere($where, "products.price >=".htmlspecialchars($_POST["price_start"]));
+    if ($_POST["price_end"]) $where = addWhere($where, "products.price <=".htmlspecialchars($_POST["price_end"]));
+    if (isset($_POST["colors"])) $where = addWhere($where, "images.color IN ('".htmlspecialchars(implode("', '", $_POST["colors"]))."')");
+    if (isset($_POST["material"])) $where = addWhere($where, "material.material_name IN ('".htmlspecialchars(implode("', '", $_POST["material"]))."')");
+    if (isset($_POST["sale"])) $where = addWhere($where, "products.price_sale !='0'");
+    $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.color, images.link FROM products 
+    			INNER JOIN images ON products.id=images.id_product
+    			INNER JOIN material ON products.material=material.id";
+    if ($where) $filter .= " WHERE $where";
     
-  } else $filter = "SELECT * FROM products ";
+  } else $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.color, images.link FROM products 
+  					INNER JOIN images ON products.id=images.id_product
+    			    INNER JOIN material ON products.material=material.id";
  var_dump($filter);
+
 
 //получаем каталог из БД
 $st=$pdo->prepare($filter);
 $st->execute();
 $stmt = $st->fetchAll(PDO::FETCH_ASSOC);
- var_dump($stmt);
+// var_dump($stmt);
 
 
-
-
+include_once 'shop.html';
+include_once '../elements/footer.html';
 
 
 

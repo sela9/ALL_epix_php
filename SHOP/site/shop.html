@@ -1,26 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Handbags | Shop</title>
-<meta charset="utf-8">
-<link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8">
-</head>
-<body>
-<div id="background">
-  <div id="page">
-    <div id="header"> <span id="connect"> <a href="#" class="facebook"></a> <a href="#" class="twitter"></a> <a href="#" class="vimeo"></a> </span> <span id="infos"> <a href="#">View Bags</a> </span> <a href="index.html" id="logo"></a>
-      <!-- /#logo -->
-      <ul id="navigation">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li class="selected"><a href="shop.html">Shop</a></li>
-        </ul>
-    </div>
-    <!-- /#header -->
+
     <div id="contents">
       <div id="shop">
         <ul class="items">
+<?php
+foreach ($stmt as $key => $value) {
+     if (!(($key+1)%4)) {
+          echo "<li class='last'>";
+     } else {echo '<li>';
+       }
+     echo $value["name"];
+     echo "<span><img src='../images/".$value["link"]."' alt='' height='253px' width='204px'</span>";
+     if ($value["price_sale"]) {
+          echo "<span class='price'>".$value["price_sale"]."</span>";
+          echo "<span class='price'><del><small>".$value["price"]."</small></del></span>";
+     } else echo "<span class='price'>".$value["price"]."</span>";
+     echo "<br>";
+     echo '</li>';
+
+
+  
+}
+
+
+?>
+
+<!-- 
           <li> <span><img src="../images/9061_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
             <a href="#" class="buy">Buy</a> </li>
           <li> <span><img src="../images/9525_blk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
@@ -37,21 +41,10 @@
             <a href="#" class="buy">Buy</a> </li>
           <li class="last"> <span><img src="../images/34426_liblk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
             <a href="#" class="buy">Buy</a> </li>
+
+
+-->
         </ul>
       </div>
     </div>
-    <!-- /#contents -->
-    <div id="footer">
-      <div id="description">
-        <div> <a href="index.html" class="logo"></a> <span>Copyright &copy; 2012 <a href="#">Company Name</a> All rights reserved | Website Template By <a target="_blank" href="http://www.freewebsitetemplates.com/">freewebsitetemplates.com</a></span> </div>
-        <p> This website template has been designed by Free Website Templates for you, for free. You can replace all this text with your own text. You can remove any link to our website from this website template, you're free to use this website template without linking back to us. If you're having problems editing this website template, then don't hesitate to ask for help on the Forum. </p>
-      </div>
-      <div class="navigation"> <a href="index.html">Home</a>| <a href="about.html">About</a>| <a href="blog.html">Blog</a>| <a href="shop.html">Shop</a>| <a href="contact-us.html">Contact Us</a> </div>
-    </div>
-    <!-- /#footer -->
-  </div>
-  <!-- /#page -->
-</div>
-<!-- /#background -->
-</body>
-</html>
+

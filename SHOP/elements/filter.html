@@ -1,0 +1,96 @@
+<!-- Вывод фильтра -->
+<form name="form" action="" method="post">
+  <table>
+    <tr>
+      <td>Цена от:</td>
+      <td><input type="text" name="price_start" /> рублей</td>
+    </tr>
+    <tr>
+      <td>Цена до:</td>
+      <td><input type="text" name="price_end" /> рублей</td>
+    </tr>
+    <tr>
+      <td colspan="2"><h4>Цвет</h4></td>
+    </tr>
+    <tr>
+      <td>Черный</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="black" />
+      </td>
+    </tr>
+    <tr>
+      <td>Коричневый</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="brown" />
+      </td>
+    </tr>
+    <tr>
+      <td>Белый</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="white" />
+      </td>
+    </tr>
+    <tr>
+      <td>Розовый</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="pink" />
+      </td>
+    </tr>
+    <tr>
+      <td>Зеленый</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="green" />
+      </td>
+    </tr>
+    <tr>
+      <td>Серый</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="gray" />
+      </td>
+    </tr>
+    <tr>
+      <td>Красный</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="red" />
+      </td>
+    </tr>
+    <tr>
+      <td>Бежевый</td>
+      <td>
+        <input type="checkbox" name="colors[]" value="beige" />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><h4>Материал</h4></td>
+    </tr>
+    <tr>
+      <td>Кожа</td>
+      <td>
+        <input type="checkbox" name="material[]" value="leather" />
+      </td>
+    </tr>
+    <tr>
+      <td>Искуственная кожа</td>
+      <td>
+        <input type="checkbox" name="material[]" value="not_leather" />
+      </td>
+    </tr>
+    <tr>
+      <td>Ткань</td>
+      <td>
+        <input type="checkbox" name="material[]" value="cloth" />
+      </td>
+    </tr>
+    <tr>
+      <td>Со скидкой</td>
+      <td>
+        <input type="checkbox" name="sale"/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" name="filter" value="Подобрать сумочки" />
+      </td>
+    </tr>
+  </table>
+</form>
