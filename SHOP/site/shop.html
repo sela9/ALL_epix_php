@@ -1,3 +1,12 @@
+<?php 
+if (isset($_POST["cart"])) {
+         $_SESSION["cart"][$_POST["id_item"]]++;
+}
+var_dump($_SESSION["cart"]);
+
+?>
+
+
 
     <div id="contents">
       <div id="shop">
@@ -8,6 +17,7 @@
 $equal=array(); //чтобы не выводить повторы
 $border = 1;    //чтобы выводить по 4 
 foreach ($stmt as $key => $value) {
+
      if (in_array($value['id'], $equal)) { continue;
      } else $equal[]=$value["id"];
      if (!($border%4)) {
@@ -20,6 +30,8 @@ foreach ($stmt as $key => $value) {
           echo "<span class='price'>".$value["price_sale"]."</span>";
           echo "<span class='price'><del><small>".$value["price"]."</small></del></span>";
      } else echo "<span class='price'>".$value["price"]."</span>";
+     echo "<form action='' method='post'><input name='cart' type='submit' value='В корзиночку'>";
+     echo "<input type='hidden' name='id_item' value=".$value["id_item"]."></form>";
      echo "<br>";
      echo '</li>';
      $border++;

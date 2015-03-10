@@ -1,13 +1,39 @@
+<?php
+//Запись значений фильтра в сессию
+
+if (!empty($_POST["filter"])) {
+                                   $_SESSION["filter"]["price_start"]=$_POST["price_start"];
+                                   $_SESSION["filter"]["price_end"]  =$_POST["price_end"];
+    if (isset($_POST["colors"])) { $_SESSION["filter"]["colors"]     =$_POST["colors"];
+    } else unset($_SESSION["filter"]["colors"]);
+    if (isset($_POST["material"])){$_SESSION["filter"]["material"]   =$_POST["material"];
+    } else unset($_SESSION["filter"]["material"]);
+    if (isset($_POST["sale"]))   { $_SESSION["filter"]["sale"]       =$_POST["sale"];
+    } else unset($_SESSION["filter"]["sale"]);
+}
+
+?>
 <!-- Вывод фильтра -->
 <form name="form" action="" method="post">
   <table>
     <tr>
       <td>Цена от:</td>
-      <td><input type="text" name="price_start" /> рублей</td>
+      <td><input type="text" name="price_start" 
+
+        <?php if (isset($_SESSION["filter"]["price_start"])) {
+                 echo "value=".$_SESSION["filter"]["price_start"]."";
+             }      
+        ?> 
+      > рублей</td>
     </tr>
     <tr>
       <td>Цена до:</td>
-      <td><input type="text" name="price_end" /> рублей</td>
+      <td><input type="text" name="price_end" 
+        <?php if (isset($_SESSION["filter"]["price_end"])) {
+                 echo "value=".$_SESSION["filter"]["price_end"]."";
+             }      
+        ?>
+      > рублей</td>
     </tr>
     <tr>
       <td colspan="2"><h4>Цвет</h4></td>
@@ -15,49 +41,89 @@
     <tr>
       <td>Черный</td>
       <td>
-        <input type="checkbox" name="colors[]" value="black" />
+        <input type="checkbox" name="colors[]" value="black" 
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("black", $_SESSION["filter"]["colors"]))) {
+         echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Коричневый</td>
       <td>
-        <input type="checkbox" name="colors[]" value="brown" />
+        <input type="checkbox" name="colors[]" value="brown" 
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("brown", $_SESSION["filter"]["colors"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Белый</td>
       <td>
-        <input type="checkbox" name="colors[]" value="white" />
+        <input type="checkbox" name="colors[]" value="white" 
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("white", $_SESSION["filter"]["colors"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Розовый</td>
       <td>
-        <input type="checkbox" name="colors[]" value="pink" />
+        <input type="checkbox" name="colors[]" value="pink"
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("pink", $_SESSION["filter"]["colors"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Зеленый</td>
       <td>
-        <input type="checkbox" name="colors[]" value="green" />
+        <input type="checkbox" name="colors[]" value="green" 
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("green", $_SESSION["filter"]["colors"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Серый</td>
       <td>
-        <input type="checkbox" name="colors[]" value="gray" />
+        <input type="checkbox" name="colors[]" value="gray" 
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("gray", $_SESSION["filter"]["colors"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Красный</td>
       <td>
-        <input type="checkbox" name="colors[]" value="red" />
+        <input type="checkbox" name="colors[]" value="red" 
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("red", $_SESSION["filter"]["colors"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Бежевый</td>
       <td>
-        <input type="checkbox" name="colors[]" value="beige" />
+        <input type="checkbox" name="colors[]" value="beige" 
+<?php if ((isset($_SESSION["filter"]["colors"]))&&(in_array("beige", $_SESSION["filter"]["colors"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
@@ -66,25 +132,45 @@
     <tr>
       <td>Кожа</td>
       <td>
-        <input type="checkbox" name="material[]" value="leather" />
+        <input type="checkbox" name="material[]" value="leather" 
+<?php if ((isset($_SESSION["filter"]["material"]))&&(in_array("leather", $_SESSION["filter"]["material"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Искуственная кожа</td>
       <td>
-        <input type="checkbox" name="material[]" value="not_leather" />
+        <input type="checkbox" name="material[]" value="not_leather" 
+<?php if ((isset($_SESSION["filter"]["material"]))&&(in_array("not_leather", $_SESSION["filter"]["material"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Ткань</td>
       <td>
-        <input type="checkbox" name="material[]" value="cloth" />
+        <input type="checkbox" name="material[]" value="cloth" 
+<?php if ((isset($_SESSION["filter"]["material"]))&&(in_array("cloth", $_SESSION["filter"]["material"]))) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
       <td>Со скидкой</td>
       <td>
-        <input type="checkbox" name="sale"/>
+        <input type="checkbox" name="sale"
+<?php if (isset($_SESSION["filter"]["sale"])) {
+          echo "checked";  
+      } 
+?>
+        >
       </td>
     </tr>
     <tr>
@@ -94,3 +180,5 @@
     </tr>
   </table>
 </form>
+
+

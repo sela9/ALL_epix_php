@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "../elements/header.html";
 include_once "../elements/filter.html";
 
@@ -33,13 +34,13 @@ function addWhere($where, $add, $and = true) {
     if (isset($_POST["colors"])) $where = addWhere($where, "images.color IN ('".htmlspecialchars(implode("', '", $_POST["colors"]))."')");
     if (isset($_POST["material"])) $where = addWhere($where, "material.material_name IN ('".htmlspecialchars(implode("', '", $_POST["material"]))."')");
     if (isset($_POST["sale"])) $where = addWhere($where, "products.price_sale !='0'");
-    $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.color, images.link FROM products 
+    $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.id, images.color, images.link FROM products 
     			INNER JOIN images ON products.id=images.id_product
     			INNER JOIN material ON products.material=material.id";
     if ($where) $filter .= " WHERE $where";
     
-  } else $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.color, images.link FROM products 
-  					INNER JOIN images ON products.id=images.id_product
+  } else $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.id AS id_item, images.color, images.link FROM products 
+  					INNER JOIN images ON products.id=images.id_product 
     			    INNER JOIN material ON products.material=material.id";
 // var_dump($filter);
 
