@@ -1,0 +1,38 @@
+<h1>Список покупок</h1>
+      <table summary="Список покупок из сессии">
+        <thead>
+          <tr>
+            <th>Картинка</th>
+            <th>Название</th>
+            <th>Цвет</th>
+            <th>Количество</th>
+            <th>Цена за шт.</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+<?php
+$summ=0;
+if (isset($stmt)) {
+      foreach ($stmt as $key => $value) {
+      	
+      	echo "<td><span><img src='../images/".$value['link']."' alt='' height='60px' width='50px'</span></td>";
+      	echo "<td>".$value['name']."</td>";
+      	echo "<td>".$value['color']."</td>";
+      	echo "<td>".$_SESSION["cart"][$value['id']]."</td>";
+        if ($value['price_sale']) {
+          echo "<td>".$value['price_sale']."</td>";
+          $summ+=($value['price_sale']*$_SESSION["cart"][$value['id']]);
+        } else echo "<td>".$value['price']."</td>";
+          $summ+=($value['price']*$_SESSION["cart"][$value['id']]);
+      	echo "<td><a href='index.php?action=delete&id=".$value['id']."'>-</a></td>";
+      	echo "<td><a href='index.php?action=edit&id=".$value['id']."'>+</a></td>";
+      	echo "</tr>";
+      }
+} else echo 'Ваша корзина пуста. <a href="shop.php">Перейти к покупкам</a>';
+?>
+
+        </tbody>
+      </table>
+<h1>Сумма покупки равна <?php echo $summ; ?></h1>

@@ -27,14 +27,14 @@ function addWhere($where, $add, $and = true) {
 
 //Составляем запрос на основании данных из фильтра
 
-  if (!empty($_POST["filter"])) {
+  if (!empty($_SESSION["filter"])) {
     $where = "";
-    if ($_POST["price_start"]) $where = addWhere($where, "products.price >=".htmlspecialchars($_POST["price_start"]));
-    if ($_POST["price_end"]) $where = addWhere($where, "products.price <=".htmlspecialchars($_POST["price_end"]));
-    if (isset($_POST["colors"])) $where = addWhere($where, "images.color IN ('".htmlspecialchars(implode("', '", $_POST["colors"]))."')");
-    if (isset($_POST["material"])) $where = addWhere($where, "material.material_name IN ('".htmlspecialchars(implode("', '", $_POST["material"]))."')");
-    if (isset($_POST["sale"])) $where = addWhere($where, "products.price_sale !='0'");
-    $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.id, images.color, images.link FROM products 
+    if ($_SESSION["filter"]["price_start"]) $where = addWhere($where, "products.price >=".htmlspecialchars($_SESSION["filter"]["price_start"]));
+    if ($_SESSION["filter"]["price_end"]) $where = addWhere($where, "products.price <=".htmlspecialchars($_SESSION["filter"]["price_end"]));
+    if (isset($_SESSION["filter"]["colors"])) $where = addWhere($where, "images.color IN ('".htmlspecialchars(implode("', '", $_SESSION["filter"]["colors"]))."')");
+    if (isset($_SESSION["filter"]["material"])) $where = addWhere($where, "material.material_name IN ('".htmlspecialchars(implode("', '", $_SESSION["filter"]["material"]))."')");
+    if (isset($_SESSION["filter"]["sale"])) $where = addWhere($where, "products.price_sale !='0'");
+    $filter = "SELECT products.id, products.name, products.price, products.price_sale, images.id AS id_item, images.color, images.link FROM products 
     			INNER JOIN images ON products.id=images.id_product
     			INNER JOIN material ON products.material=material.id";
     if ($where) $filter .= " WHERE $where";

@@ -5,7 +5,7 @@
     </div>
     <div id="contents">
       <div id="featured">
-        <ul>
+        <ul class="items">
 <?php
 $equal=array();
 foreach ($stmt as $key => $value) {
@@ -16,7 +16,7 @@ foreach ($stmt as $key => $value) {
      } else {echo '<li>';
        }
      echo "<img src='../images/".$value["link"]."' alt='' height='253px' width='204px'";
-     echo "<del>".$value['price']."</del>=>".$value['price_sale'];
+     echo "<span class='price'><small><del>".$value['price']."</del></small>".$value['price_sale']."</span>";
      echo "<br>";
      echo '</li>';
 

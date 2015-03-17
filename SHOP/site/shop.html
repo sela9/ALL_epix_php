@@ -1,8 +1,12 @@
 <?php 
+// запись покупок в сессию
 if (isset($_POST["cart"])) {
-         $_SESSION["cart"][$_POST["id_item"]]++;
+         if (isset($_SESSION["cart"][$_POST["id_item"]])) {
+                  $_SESSION["cart"][$_POST["id_item"]]++;
+         } else $_SESSION["cart"][$_POST["id_item"]]='1';
 }
 var_dump($_SESSION["cart"]);
+//var_dump($_POST);
 
 ?>
 
