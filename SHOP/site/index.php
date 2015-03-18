@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 //$actions = ['index', 'shop'];
 //$action = isset($_GET['page']) ? $_GET['page'] : 'index';

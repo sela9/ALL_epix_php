@@ -4,8 +4,9 @@ if (isset($_POST["cart"])) {
          if (isset($_SESSION["cart"][$_POST["id_item"]])) {
                   $_SESSION["cart"][$_POST["id_item"]]++;
          } else $_SESSION["cart"][$_POST["id_item"]]='1';
+         header ('Location: shop.php');
 }
-var_dump($_SESSION["cart"]);
+//var_dump($_SESSION["cart"]);
 //var_dump($_POST);
 
 ?>
@@ -29,7 +30,7 @@ foreach ($stmt as $key => $value) {
      } else {echo '<li>';
        }
      echo $value["name"];
-     echo "<span><img src='../images/".$value["link"]."' alt='' height='253px' width='204px'</span>";
+     echo "<span><a href=handbag.php?bag=".$value['id']."><img src='../images/".$value["link"]."' alt='' height='253px' width='204px'></a></span>";
      if ($value["price_sale"]) {
           echo "<span class='price'>".$value["price_sale"]."</span>";
           echo "<span class='price'><del><small>".$value["price"]."</small></del></span>";

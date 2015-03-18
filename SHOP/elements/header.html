@@ -2,11 +2,24 @@
 <html>
 <head>
 <title>Handbags</title>
+
 <meta charset="utf-8">
 <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8">
 </head>
 <body>
+  <span>В моей корзине <a href=cart.php><?php 
+  //количество сумок в корзине
+   if (isset($_SESSION['cart'])) {
+         $qtt=0;
+         foreach ($_SESSION['cart'] as $key => $value) {
+               $qtt+=$value;
+         }
+         echo $qtt;
+   } else echo 'нет';
+
+  ?></a> сумочек</span>
 <div id="background">
+
   <div id="page">
     <div id="header"> <span id="connect"></span> <span id="infos"></span> <a href="index.php" id="logo"></a>
       <!-- /#logo -->

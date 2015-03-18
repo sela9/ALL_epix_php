@@ -1,0 +1,46 @@
+<?php 
+// запись покупок в сессию
+if (isset($_POST["cart"])) {
+         if (isset($_SESSION["cart"][$_POST["id_item"]])) {
+                  $_SESSION["cart"][$_POST["id_item"]]++;
+         } else $_SESSION["cart"][$_POST["id_item"]]='1';
+         header ('Location: handbag.php?bag='.$bag.'');
+}
+
+?>
+<div id="contents">
+      <div id="shop">
+
+<?php
+if (!($bag)) {
+	echo 'Выберите сумочку в <a href=shop.php>каталоге</a> для просмотра детальной информации';
+} else echo '<h3>Детальная информация о сумочке</h3>'; 
+?>
+				<h2><?php echo $stmt['0']['name']; ?></h2>
+				<h4><?php echo $stmt['0']['description']; ?></h4>
+				<h4>Материал: <?php echo $stmt['0']['name_full']; ?></h4>
+				<h2>Цена: <?php 
+if ($stmt['0']['price_sale']) {
+	echo $stmt['0']['price_sale']."<small><del>".$stmt['0']['price']."</del></small>"; 
+} else echo $stmt['0']['price']; 
+                           ?></h2>
+
+			<ul class="items">
+<?php
+//Вывод результатов поиска по фильтру
+
+foreach ($stmt as $key => $value) {
+
+     echo "<li><span><img src='../images/".$value["link"]."' alt='' height='253px' width='204px'</span>";
+     echo "<form action='' method='post'><input name='cart' type='submit' value='В корзиночку'>";
+     echo "<input type='hidden' name='id_item' value=".$value["id_item"]."></form>";
+     echo "<br>";
+     echo '</li>';
+}
+
+
+?>
+
+        	</ul>
+      </div>
+</div>
