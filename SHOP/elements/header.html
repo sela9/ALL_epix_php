@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8">
 </head>
 <body>
-  <span>В моей корзине <a href=cart.php><?php 
+  <span>В моей корзине сумочек: <a href=cart.php><?php 
   //количество сумок в корзине
    if (isset($_SESSION['cart'])) {
          $qtt=0;
@@ -17,7 +17,7 @@
          echo $qtt;
    } else echo 'нет';
 
-  ?></a> сумочек</span>
+  ?></a></span>
 <div id="background">
 
   <div id="page">

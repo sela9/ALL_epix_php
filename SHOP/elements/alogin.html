@@ -1,0 +1,46 @@
+<?php
+if (isset($_POST["login"])){
+		try {
+			$login="SELECT password 
+			        FROM   adm 
+			        WHERE login=:login";
+			$sttm = $pdo->prepare($login);
+			$sttm->bindParam(':login', $_POST["login"]);
+			$sttm->execute();
+			$hash = $sttm->fetchAll(PDO::FETCH_ASSOC);
+			if (!$hash) {
+				echo "Ошибка авторизации, пользователь не найден";
+			} else if (password_verify($_POST["pwwd"], $hash['0']["password"]))     {
+				
+				echo 'Password is valid!';
+
+			} else {
+			    echo 'Invalid password.';
+			  }
+		}
+		catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+			echo '<br>Invalid data.';
+
+		}
+
+}
+
+
+
+
+?>
+
+
+<form action="createtheworld.php" method="post">
+      Логин для господина: <br>
+      <input type="text" name="login" required>
+      <br>
+      Пароль для господина: <br>
+      <input type="password" name="pwwd" required>
+      <br><br>
+      <input type="submit" value="Авторизоваться">
+</form>
+<?php 
+
+?>
