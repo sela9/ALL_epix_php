@@ -1,5 +1,6 @@
 <?php 
 
+if(isset($_POST["newbag"])) {
 // Вставка изображения сумочки 
 $target_dir = "../images/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -42,11 +43,19 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        $new_color = "INSERT INTO images (id_product, link, color)
+                      VALUES (:id, :file, :color)";
+        $stf=$pdo->prepare($new_color);
+        $stf->bindParam(':id', $_GET['id']);
+        $stf->bindParam(':file', basename( $_FILES["fileToUpload"]["name"]));
+        $stf->bindParam(':color', $_POST['color']);
+        $stf->execute();
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
 }
-//Конец вставки сумочки
+//Конец вставки нового цвета и фото для сумочки
+}
 
 //Изменение инфы о сумочке (update)
 if (isset($_POST["editbag"])) {
@@ -68,20 +77,29 @@ $st->bindParam(':fabric', $_POST['material']);
 $st->bindParam(':id', $_POST['id_bag']);
 //var_dump($st);
 $st->execute();
-var_dump($st);
 }
 
 //Изменение цвета сумочки (update)
-//if(isset($_POST["bagcolor"])){}
+if(isset($_POST["bagcolor"])){
+        $change_color = "UPDATE images 
+                         SET color=:color
+                         WHERE id=:id ";
+        $stf=$pdo->prepare($change_color);
+        $stf->bindParam(':color', $_POST['color']);
+        $stf->bindParam(':id', $_POST['id_item']);
+        $stf->execute();
+
+
+}
 
 //Удалеление строки с цветом и фоткой (delete)
-//if(isset($_POST["deletebag"])){}
-
-//Добавление новой строки с цветом и фоткой (insert)
-//if(isset($_POST["newbag"])) {}
-
-
-
+if(isset($_POST["deletebag"])){
+    $del_color = "DELETE FROM images
+                  WHERE id=:id";
+    $std=$pdo->prepare($del_color);
+    $std->bindParam(':id', $_POST['id_item']);
+    $std->execute();
+}
 
 
 if (!(isset($_GET['id']))) {
@@ -146,7 +164,7 @@ if (!(isset($_GET['id']))) {
 
     $bagedit = "SELECT products.id, products.name, products.description, products.price, products.price_sale, images.id AS id_item, images.color, images.link, material.name_full, material.id AS id_fabric
                 FROM products 
-                INNER JOIN images ON products.id=images.id_product 
+                LEFT JOIN images ON products.id=images.id_product 
                 INNER JOIN material ON products.material=material.id 
                 WHERE products.id = :id ";
 
@@ -159,7 +177,7 @@ if (!(isset($_GET['id']))) {
     //    var_dump($stt);
         $stt->execute();
         $stm = $stt->fetchAll(PDO::FETCH_ASSOC);
-//        var_dump($stm);
+ //       var_dump($stm);
     }
 ?>
     <h3>Изменить основную информацию о сумочке</h3>
