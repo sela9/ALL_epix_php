@@ -11,9 +11,8 @@ if (isset($_POST["login"])){
 			if (!$hash) {
 				echo "Ошибка авторизации, пользователь не найден";
 			} else if (password_verify($_POST["pwwd"], $hash['0']["password"]))     {
-				
-				echo 'Password is valid!';
-
+				$_SESSION['root']='Повелитель';
+				header ('Location: createtheworld.php');
 			} else {
 			    echo 'Invalid password.';
 			  }
@@ -26,11 +25,7 @@ if (isset($_POST["login"])){
 
 }
 
-
-
-
 ?>
-
 
 <form action="createtheworld.php" method="post">
       Логин для господина: <br>

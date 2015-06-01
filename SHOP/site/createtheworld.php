@@ -1,4 +1,5 @@
 <?php
+session_start();
 //Подключение БД
 $pdo = new PDO(
     'mysql:host=localhost;dbname=handbags;charset=utf8', 
@@ -10,6 +11,7 @@ $pdo->setAttribute(
     PDO::ERRMODE_EXCEPTION
 );
 
-
-include_once "../elements/alogin.html";
+if ((isset($_SESSION['root']))&&($_SESSION['root']==='Повелитель')) {
+	include_once "../elements/settings.html";
+} else include_once "../elements/alogin.html";
 ?>
