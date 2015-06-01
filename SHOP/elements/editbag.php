@@ -53,22 +53,21 @@ if (isset($_POST["editbag"])) {
 var_dump($_POST);  
 
 $item_upd = "UPDATE products
-           SET products.name=?, 
-               products.description=?,
-               products.price=?,
-               products.price_sale=?,
-               products.material=?,
-         WHERE products.id = ?";
-
+           SET products.name=:name, 
+               products.description=:descr,
+               products.price=:price,
+               products.price_sale=:sale,
+               products.material=:fabric
+         WHERE products.id = :id";
 $st=$pdo->prepare($item_upd);
-/*$st->bindParam(':name', $_POST['name']);
-$st->bindParam(':decsr', $_POST['description']);
+$st->bindParam(':name', $_POST['name']);
+$st->bindParam(':descr', $_POST['description']);
 $st->bindParam(':price', $_POST['price']);
 $st->bindParam(':sale', $_POST['price_sale']);
 $st->bindParam(':fabric', $_POST['material']);
-$st->bindParam(':id', $_POST['id_bag'], PDO::PARAM_INT);*/
+$st->bindParam(':id', $_POST['id_bag']);
 //var_dump($st);
-$st->execute(array($_POST['name'], $_POST['description'], $_POST['price'], $_POST['price_sale'], $_POST['material'], $_GET['id']));
+$st->execute();
 var_dump($st);
 }
 
