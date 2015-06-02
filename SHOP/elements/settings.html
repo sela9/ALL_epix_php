@@ -1,17 +1,30 @@
+  
+
+
 <?php
 
-echo "Добро пожаловать, ".$_SESSION['root']."!<br>";
+//echo "Добро пожаловать, ".$_SESSION['root']."!<br>";
 
-$actions = ['insert', 'list', 'editord', 'editbag', 'bi'];
+$actions = ['insert', 'list', 'editord', 'editbag'];
 $action = isset($_GET['action']) ? $_GET['action'] : 'list';
 if (!in_array($action, $actions)) {
     exit('Запрещенная ссылочка');
 }
 ?>
 
-<a href=createtheworld.php?action=list>Список заказов</a><br>
-<a href=createtheworld.php?action=insert>Вставить новый товар</a><br>
-<a href=createtheworld.php?action=editbag>Изменить данные о товаре</a><br>
+
+	<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href=createtheworld.php?action=list>Список заказов</a></li>
+            <li role="presentation"><a href=createtheworld.php?action=insert>Вставить новый товар</a></li>
+            <li role="presentation"><a href=createtheworld.php?action=editbag>Изменить данные о товаре</a></li>
+          </ul>
+        </nav>
+        <h5 class="text-muted"><?php echo "Добро пожаловать, ".$_SESSION['root']."!"?></h5>
+      </div>
+ 
 
 <?php
 

@@ -13,18 +13,18 @@
     }     
 
 ?>
-
- <h1>Полный список заказов</h1>
-      <table border=1 summary="Список заказов">
-        <thead>
-          <tr>
-            <th>Статус заказа</th>
-            <th>Сумма, руб.</th>
-            <th>Имя</th>
-            <th>Как связаться?</th>
-          </tr>
-        </thead>
-        <tbody>
+ <h2 class="sub-header">Полный список заказов</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Статус заказа</th>
+                  <th>Сумма, руб.</th>
+                  <th>Имя</th>
+                  <th>Как связаться?</th>
+                </tr>
+              </thead>
+              <tbody>
 <?php 
 foreach ($orders as $key => $row) {
 	echo "<td><a href='createtheworld.php?action=editord&id=".$row['id']."'>".$row['status']."</a></td>";
@@ -37,3 +37,5 @@ foreach ($orders as $key => $row) {
 
         </tbody>
       </table>
+    </div>
+  </div>

@@ -26,16 +26,14 @@ if (isset($_POST["login"])){
 }
 
 ?>
-
-<form action="createtheworld.php" method="post">
-      Логин для господина: <br>
-      <input type="text" name="login" required>
-      <br>
-      Пароль для господина: <br>
-      <input type="password" name="pwwd" required>
-      <br><br>
-      <input type="submit" value="Авторизоваться">
-</form>
+   <div class="container">
+		<form class="form-signin" style="max-width: 330px;" action="createtheworld.php" method="post">
+			  <h2 class="form-signin-heading">Мы ждали вас, господин!</h2>
+		      <input type="text" name="login" id="inputEmail" class="form-control" placeholder="Логин для господина" required autofocus>
+		      <input type="password" name="pwwd" id="inputPassword" class="form-control" placeholder="Пароль для господина" required>
+		      <button class="btn btn-lg btn-primary btn-block" type="submit">Авторизоваться</button>
+		</form>
+   </div>
 <?php 
 
 ?>
