@@ -120,7 +120,7 @@ if (!(isset($_GET['id']))) {
     ?>
 
      <h1>Полный список сумочек</h1>
-          <table border=1 summary="Список заказов">
+          <table class="table table-striped" summary="Список заказов">
             <thead>
               <tr>
                 <th>Фото</th>
@@ -147,7 +147,7 @@ if (!(isset($_GET['id']))) {
     			      echo "<td>".$value["price"]."</td>";
     			      echo "<td>".$value["color"]."</td>";
     			      echo "<td>".$value["name_full"]."</td>";
-    			      echo "<td><form action='createtheworld.php?action=editbag&id=".$value["id"]."' method='post'><input name='bagedit' type='submit' value='Изменить'>";
+    			      echo "<td><form action='createtheworld.php?action=editbag&id=".$value["id"]."' method='post'><input name='bagedit' type='submit' class='btn btn-default' value='Изменить'>";
     			      echo "<input type='hidden' name='id_item' value=".$value["id_item"]."></form></td></tr>";
     	        }
     }
@@ -180,48 +180,103 @@ if (!(isset($_GET['id']))) {
  //       var_dump($stm);
     }
 ?>
+<!-- Форма вывода информации о сумочке и всех цветах для редактирования и добавления цветов-->
     <h3>Изменить основную информацию о сумочке</h3>
-    <form action="" method="post">
-    Название:        <input type="text" name="name"        value="<?php echo $stm['0']['name']; ?>"><br>
-    Описание:        <input type="text" name="description" value="<?php echo $stm['0']['description']; ?>"><br>
-    Цена:            <input type="text" name="price"       value="<?php echo $stm['0']['price']; ?>"><br>
-    Цена со скидкой: <input type="text" name="price_sale"  value="<?php echo $stm['0']['price_sale']; ?>"><br>
-    Материал:        <select name="material">
+    <form action="" class="form-horizontal" method="post">
+        <div class="form-group">
+             <label for="inputEmail3" class="col-sm-2 control-label">Название:</label>
+             <div class="col-sm-10">
+                 <input type="text" name="name" class="form-control" value="<?php echo $stm['0']['name']; ?>">
+             </div>
+        </div>
+        <div class="form-group">
+             <label for="inputEmail3" class="col-sm-2 control-label">Описание:</label>
+             <div class="col-sm-10">
+                 <input type="text" name="description" value="<?php echo $stm['0']['description']; ?>" class="form-control">
+             </div>
+        </div>
+        <div class="form-group">
+             <label for="inputEmail3" class="col-sm-2 control-label">Цена:</label>
+             <div class="col-sm-10">
+                 <input type="text" name="price" value="<?php echo $stm['0']['price']; ?>" class="form-control">
+             </div>
+        </div>
+        <div class="form-group">
+             <label for="inputEmail3" class="col-sm-2 control-label">Цена со скидкой:</label>
+             <div class="col-sm-10">
+                 <input type="text" name="price_sale"  value="<?php echo $stm['0']['price_sale']; ?>" class="form-control">
+             </div>
+        </div>
+        <div class="form-group">
+                <label class="col-sm-2 control-label">Материал:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="material">
                       <option value="1" <?php if (($stm['0']['id_fabric']) == '1') {echo 'selected';} ?> >Натуральная кожа</option>
                       <option value="2" <?php if (($stm['0']['id_fabric']) == '2') {echo 'selected';} ?> >Искусственная кожа</option>
                       <option value="3" <?php if (($stm['0']['id_fabric']) == '3') {echo 'selected';} ?> >Ткань</option>
-                      </select><br>
-    <input type='hidden' name='id_bag' value="<?php echo $_GET['id']; ?>" >
-    <input name='editbag' type='submit' value='Изменить'></form>
+                    </select>
+                </div>
+        </div>
+        <input type='hidden' name='id_bag' value="<?php echo $_GET['id']; ?>" >
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input name='editbag' class="btn btn-default" type='submit' value='Изменить'>
+            </div>
+        </div>
+    </form>
 
     <h3>Изменить сведения о цвете</h3>
-
+        <div class="row">
 
 <?php
 //Вывод всех фоток для сумочки с указанием цвета и возможностью изменения и удаления
 
     foreach ($stm as $key => $value) {
-?>
-         <form action="" method="post">
-         <img src="../images/<?php echo $value["link"]; ?>" alt='' height='50px' width='40px'>
-         Цвет: <input type="text" name="color" value="<?php echo $value['color']; ?>"><br>
-         <input name='bagcolor' type='submit' value='Изменить'>
-         <input type='hidden' name='id_item' value="<?php echo $value["id_item"]; ?>"></form>
-         <form action="" method="post">
-         <input type='hidden' name='id_item' value="<?php echo $value["id_item"]; ?>">
-         <input name='deletebag' type='submit' value='Удалить'>
-         </form>
-         <br>
-    
-
+?>          
+            <div class="col-sm-6 col-md-3">
+              <div class="thumbnail">
+                 <img src="../images/<?php echo $value["link"]; ?>" alt='' height='150px' width='120px'>
+                 <div class="caption">
+                  <div class="row">
+                     <form action="" method="post">
+                             <label style="padding-left:10%">Цвет</label>
+                             <input type="text" name="color" value="<?php echo $value['color']; ?>">
+                             <input name='bagcolor' class="col-sm-6 btn btn-default" type='submit' value='Изменить'>
+                             <input type='hidden' name='id_item' value="<?php echo $value["id_item"]; ?>">
+                     </form>
+                     <form action="" method="post">
+                             <input type='hidden' name='id_item' value="<?php echo $value["id_item"]; ?>">
+                             <input name='deletebag' class="col-sm-6 btn btn-default" type='submit' value='Удалить'>
+                     </form>
+                  </div>
+                 </div>
+              </div>
+            </div>
 <?php     
 }
-?>  
+?>
+</div>
+
 <!-- Форма для добавления фотки и цвета для сумочки -->
-         <form action="" method="post" enctype="multipart/form-data">
-         Выбрать фото: <input type="file" name="fileToUpload" id="fileToUpload" required><br>
-         Цвет: <input type="text" name="color">
-         <input name='newbag' type='submit' value='Добавить'><br>
+<h3>Добавить новый цвет с фото</h3>
+         <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <div class="form-group">
+               <label for="inputEmail3" class="col-sm-2 control-label">Выбрать фото:</label>
+                  <div class="col-sm-10">
+                      <input type="file" class="btn btn-default" name="fileToUpload" id="fileToUpload" required>
+                  </div>
+            </div>
+            <div class="form-group">
+               <label for="inputEmail3" class="col-sm-2 control-label">Цвет:</label>
+                  <div class="col-sm-3">
+                      <input type="text" name="color" class="form-control">
+                  </div>
+            </div>   
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                   <input name='newbag' class="btn btn-default" type='submit' value='Добавить'>
+                </div>
+            </div> 
          </form>
 <?php 
 }

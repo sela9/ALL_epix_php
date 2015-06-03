@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once "../elements/header.html";
+echo '<div class="row row-offcanvas row-offcanvas-right">';
 include_once "../elements/filter.html";
 
 //Подключение БД
@@ -53,6 +54,7 @@ $stmt = $st->fetchAll(PDO::FETCH_ASSOC);
 
 
 include_once 'shop.html';
+echo '</div>';
 include_once '../elements/footer.html';
 
 

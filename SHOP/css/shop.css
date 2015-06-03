@@ -1,0 +1,9 @@
+h1, h2, h3, h4 { color: #B52A6E }
+.table td { border-top: none !important }
+.footer { background: #f4f4f4; margin-top: 40px; padding-top: 10px; padding-bottom: 5px; border-top: solid #b7b7b7 1px; }
+.about { padding: 50px; }
+.table th { text-align: center }
+small span, .bag_price { color: #505050 }
+.thumbnail { background: #f0f0f0; }
+.jumbotron { background: #FF2E94 url("../css/bubble2.png") no-repeat center; background-size: contain; color: white}
+.jumbotron h1 { text-shadow: white 0 0 8px; }

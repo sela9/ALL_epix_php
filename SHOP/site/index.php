@@ -22,8 +22,9 @@ $home = "SELECT products.id, products.name, products.price, products.price_sale,
          FROM products 
     	 LEFT JOIN images ON products.id=images.id_product
     	 WHERE products.price_sale !='0' AND images.color !=''
+         GROUP BY images.id_product
     	 ORDER BY products.price_sale
-    	 LIMIT 8 ";
+    	 LIMIT 4 ";
 $st=$pdo->prepare($home);
 $st->execute();
 $stmt = $st->fetchAll(PDO::FETCH_ASSOC);

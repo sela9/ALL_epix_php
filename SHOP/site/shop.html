@@ -1,21 +1,6 @@
-<?php 
-// запись покупок в сессию
-if (isset($_POST["cart"])) {
-         if (isset($_SESSION["cart"][$_POST["id_item"]])) {
-                  $_SESSION["cart"][$_POST["id_item"]]++;
-         } else $_SESSION["cart"][$_POST["id_item"]]='1';
-         header ('Location: shop.php');
-}
-//var_dump($_SESSION["cart"]);
-//var_dump($_POST);
-
-?>
-
-
-
-    <div id="contents">
-      <div id="shop">
-        <ul class="items">
+<div class="col-xs-12 col-sm-9">
+    <div class="row">
+        
 <?php
 //Вывод результатов поиска по фильтру
 
@@ -25,34 +10,26 @@ foreach ($stmt as $key => $value) {
 
      if (in_array($value['id'], $equal)) { continue;
      } else $equal[]=$value["id"];
-     if (!($border%4)) {
-          echo "<li class='last'>";
-     } else {echo '<li>';
-       }
-     echo $value["name"];
-     echo "<span><a href=handbag.php?bag=".$value['id']."><img src='../images/".$value["link"]."' alt='' height='253px' width='204px'></a></span>";
+     echo '<div class="col-xs-6 col-lg-4">';
+     echo "<div class='thumbnail'>";
+     echo "<span><a href=handbag.php?bag=".$value['id']."><img class='img-responsive' src='../images/".$value["link"]."' alt='' width='200px' height='auto'></a></span>";echo "<div class='caption text-center'>";
+     echo "<h4>".$value["name"]."</h4>";
      if ($value["price_sale"]) {
           echo "<span class='price'>".$value["price_sale"]."</span>";
           echo "<span class='price'><del><small>".$value["price"]."</small></del></span>";
      } else echo "<span class='price'>".$value["price"]."</span>";
-     echo "<form action='' method='post'><input name='cart' type='submit' value='В корзиночку'>";
+     echo ' <span class="glyphicon glyphicon-ruble" aria-hidden="true"></span></small>';
+     echo "<form action='' method='post'><input class='btn btn-default' name='cart' type='submit' value='В корзиночку'>";
      echo "<input type='hidden' name='id_item' value=".$value["id_item"]."></form>";
-     echo "<br>";
-     echo '</li>';
+     echo "</div></div></div>";
      $border++;
 }
 
-
+     
 ?>
 
-<!-- 
-         
-          <li class="last"> <span><img src="../images/34426_liblk_a0" alt="" height="253px" width="204px"></span> <span class="price">$18.00</span> Sellcouth One<br>
-            <a href="#" class="buy">Buy</a> </li>
 
-
--->
-        </ul>
-      </div>
+       
     </div>
+</div>
 

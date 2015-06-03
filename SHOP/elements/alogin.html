@@ -9,17 +9,17 @@ if (isset($_POST["login"])){
 			$sttm->execute();
 			$hash = $sttm->fetchAll(PDO::FETCH_ASSOC);
 			if (!$hash) {
-				echo "Ошибка авторизации, пользователь не найден";
+				echo "<div class='alert alert-danger'>Ошибка авторизации, пользователь не найден</div>";
 			} else if (password_verify($_POST["pwwd"], $hash['0']["password"]))     {
 				$_SESSION['root']='Повелитель';
 				header ('Location: createtheworld.php');
 			} else {
-			    echo 'Invalid password.';
+			    echo "<div class='alert alert-danger'>Invalid password.</div>";
 			  }
 		}
 		catch (PDOException $e) {
-			echo "Error: " . $e->getMessage();
-			echo '<br>Invalid data.';
+			echo "<div class='alert alert-danger'>Error: " . $e->getMessage();
+			echo '<br>Invalid data.</div>';
 
 		}
 

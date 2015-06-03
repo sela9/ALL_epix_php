@@ -8,39 +8,38 @@ if (isset($_POST["cart"])) {
 }
 
 ?>
-<div id="contents">
-      <div id="shop">
-
+<div>
+<table class="table table-striped">
 <?php
 if (!($bag)) {
 	echo 'Выберите сумочку в <a href=shop.php>каталоге</a> для просмотра детальной информации';
-} else echo '<h3>Детальная информация о сумочке</h3>'; 
+}
 ?>
-				<h2><?php echo $stmt['0']['name']; ?></h2>
-				<h4><?php echo $stmt['0']['description']; ?></h4>
-				<h4>Материал: <?php echo $stmt['0']['name_full']; ?></h4>
-				<h2>Цена: <?php 
+    <tr>
+        <td><h2><?php echo $stmt['0']['name']; ?></h2></td><td><h3 class="bag_price">Цена: <?php 
 if ($stmt['0']['price_sale']) {
 	echo $stmt['0']['price_sale']."<small><del>".$stmt['0']['price']."</del></small>"; 
 } else echo $stmt['0']['price']; 
-                           ?></h2>
-
-			<ul class="items">
+?><small><span class="glyphicon glyphicon-ruble" aria-hidden="true"></span></small></h3></td>
+    </tr>
+    <tr colspan="2">
+        <td><?php echo $stmt['0']['description']; ?><br/>Материал: <?php echo $stmt['0']['name_full']; ?></td>
+    </tr>
+    
+</table><br/>
+</div>
+<div class="row">
 <?php
 //Вывод результатов поиска по фильтру
 
 foreach ($stmt as $key => $value) {
-
-     echo "<li><span><img src='../images/".$value["link"]."' alt='' height='253px' width='204px'</span>";
-     echo "<form action='' method='post'><input name='cart' type='submit' value='В корзиночку'>";
+     echo "<div class='col-lg-3 col-md-4 col-xs-6'>";
+     echo "<div class='thumbnail'>";
+     echo "<img class='img-responsive' src='../images/".$value["link"]."' alt='' width='200px' height='auto'>";
+     echo "<div class='caption text-center'>";
+     echo "<form action='' method='post'><input class='btn btn-default' name='cart' type='submit' value='В корзиночку'>";
      echo "<input type='hidden' name='id_item' value=".$value["id_item"]."></form>";
-     echo "<br>";
-     echo '</li>';
+     echo "</div></div></div>";
 }
-
-
 ?>
-
-        	</ul>
-      </div>
 </div>

@@ -64,10 +64,6 @@ if (isset($_POST['update'])) {
 }
 
 
-
-
-
-
 ?>
  
 
@@ -75,15 +71,19 @@ if (isset($_POST['update'])) {
 
  
     <form class="form-horizontal" action="" method="post">
-		<div class="form-group">
+        <div class="form-group">
     		<label class="col-sm-2 control-label">Клиент</label>
     		<div class="col-sm-10">
      			<p class="form-control-static"><?php echo $orders['0']['user_name']?></p>
     		</div>
+        </div>
+        <div class="form-group">
     		<label class="col-sm-2 control-label">Контакт</label>
     		<div class="col-sm-10">
      			<p class="form-control-static"><?php echo $orders['0']['contacts']?></p>
     		</div>
+        </div>
+        <div class="form-group">
     		<label class="col-sm-2 control-label">Статус заказа</label>
     		<div class="col-sm-10">
 	    		<select class="form-control" name="status">
@@ -95,30 +95,27 @@ if (isset($_POST['update'])) {
 					?>
 	       		</select>
        		</div>
-       	</div>
-       	<div class="form-group">
-			<label for="inputPassword" class="col-sm-2 control-label">Сумма</label>
+        </div>
+        <div class="form-group">
+			<label class="col-sm-2 control-label">Сумма</label>
  			<div class="col-sm-10">
       			<input type="text" name="order_summ" value="<?php echo $orders['0']['order_summ']; ?>" class="form-control">
     		</div>
-
+        </div>
 
     		<?php foreach ($orders as $key => $value) { ?>
-    		<div class="row">
-    			<div class="col-sm-2">
-	    			<label for="inputPassword" class="col-sm-2 control-label">Количество</label>
-	    		</div>
-	    		<div class="col-sm-2">
+        <div class="form-group">
+	            <label class="col-sm-2 control-label">Количество</label>
+	    		<div class="col-sm-1">
 	    			<img src='../images/<?php echo $value["link"]?>' alt='' height='50px' width='40px'>
 	    		</div>
-	 			<div class="col-sm-2">
+	 			<div class="col-sm-9">
 	      			<input type="text" name="<?php echo $value["id"]; ?>" value="<?php echo $value['qtt']; ?>" class="form-control">
 	    		</div>
-	    	</div>
+        </div>
     		<?php } ?>
 
 
-  		</div>
 
 <!--      
 <?php foreach ($orders as $key => $value) { ?>
@@ -128,18 +125,15 @@ if (isset($_POST['update'])) {
       <input type="text" name="<?php echo $value["id"]; ?>" value="<?php echo $value['qtt']; ?>">
       <br>
 
-
-
 <?php } ?>
 
 -->
-      
-      <input type="submit" name="update" value="Изменить">
+      <div class="form-group text-right">
+          <div class="col-sm-2">
+            <input class="btn btn-default" type="submit" name="update" value="Изменить">
+          </div>
+      </div>
     </form>
-
-
-
-
 
 <?php
 } else echo "Не выбран заказ";

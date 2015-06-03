@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 01 2015 г., 19:25
+-- Время создания: Июн 03 2015 г., 21:11
 -- Версия сервера: 5.6.21
 -- Версия PHP: 5.6.3
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `id_product` int(10) NOT NULL,
   `link` varchar(250) NOT NULL,
   `color` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=298 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `images`
@@ -346,7 +346,9 @@ INSERT INTO `images` (`id`, `id_product`, `link`, `color`) VALUES
 (294, 123, '9951_tan_a0.jpg', 'brown'),
 (295, 124, '9966_blk_a0.jpg', 'black'),
 (296, 124, '9966_svbk_a0.jpg', 'black'),
-(297, 124, '9966_tan_a0.jpg', 'brown');
+(297, 124, '9966_tan_a0.jpg', 'brown'),
+(303, 128, '35011_sve2m_a0.jpg', 'red'),
+(304, 128, '35011_m1.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -382,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `order_summ` varchar(15) NOT NULL,
   `status` varchar(20) NOT NULL DEFAULT 'Заказан',
   `OrderDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `orders`
@@ -396,7 +398,9 @@ INSERT INTO `orders` (`id`, `contacts`, `user_name`, `order_summ`, `status`, `Or
 (7, '+7-950-2202020', 'Олег', '89990', 'Подтвержден', '2015-05-27 21:47:48'),
 (8, '385-7985', 'Анечка', '66000', 'Подтвержден', '2015-05-27 21:47:48'),
 (9, '336-9874', 'Елена', '100000', 'Завершен', '2015-05-27 21:47:48'),
-(10, '337-8521', 'Нина', '123450', 'Оплачен', '2015-05-27 21:47:48');
+(10, '337-8521', 'Нина', '123450', 'Оплачен', '2015-05-27 21:47:48'),
+(11, 'miha', 'Михалыч', '10500', 'Заказан', '2015-06-02 19:22:15'),
+(12, '335-2187 спб', 'Димон', '19000', 'Заказан', '2015-06-03 18:46:20');
 
 -- --------------------------------------------------------
 
@@ -411,7 +415,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `price` float NOT NULL,
   `price_sale` float NOT NULL,
   `material` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
@@ -424,8 +428,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `price_sale`, `mat
 (4, 'Valentino', 'Подходит к вечернему платью', 9000, 8000, 1),
 (5, 'Fendi', 'Прекрасная сумка для деволой встречи', 5000, 0, 1),
 (6, 'Mochino', 'Сумка украсит ваш поход в театр', 4000, 0, 1),
-(7, 'Arcadia', 'Великолепный выбор для повседневного использования', 2000, 0, 1),
-(8, 'Bottega Veneta', 'Подходит к вечернему платью', 5600, 0, 2),
+(7, 'Arcadia', 'Великолепный выбор для повседневного использования', 2000, 1995, 2),
+(8, 'Bottega Veneta', 'Подходит к вечернему платью', 5600, 0, 1),
 (9, 'Marino Orlandi', 'Прекрасная сумка для деволой встречи', 9800, 0, 1),
 (10, 'Louis Vuitton', 'Сумка украсит ваш поход в театр', 12000, 9000, 1),
 (11, 'Dolce&Gabbana', 'Великолепный выбор для повседневного использования', 15000, 6000, 1),
@@ -541,7 +545,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `price_sale`, `mat
 (121, 'Dolce&Gabbana', 'Прекрасная сумка для деволой встречи', 2000, 0, 2),
 (122, 'Gucci', 'Сумка украсит ваш поход в театр', 5600, 0, 3),
 (123, 'Prada', 'Великолепный выбор для повседневного использования', 9800, 0, 3),
-(124, 'Valentino', 'Подходит к вечернему платью', 12000, 4000, 3);
+(124, 'Valentino', 'Подходит к вечернему платью', 12000, 4000, 3),
+(128, 'Taxi tote', 'A traditional Southwestern motif is rendered in woven leather and vibrant color on this seasonal tote, adding bold texture and dimension to its simple, flared shape. Removable leather feather charms lend an artisanal touch to its spacious, hand-finis', 15000, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -578,7 +583,11 @@ INSERT INTO `prod_ordr` (`id_prdct`, `id_ordr`, `qtt`) VALUES
 (200, 9, 2),
 (271, 9, 2),
 (193, 9, 1),
-(56, 10, 10);
+(56, 10, 10),
+(5, 11, 7),
+(255, 12, 4),
+(110, 12, 1),
+(164, 12, 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -627,7 +636,7 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=298;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=305;
 --
 -- AUTO_INCREMENT для таблицы `material`
 --
@@ -637,12 +646,12 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=125;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=129;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

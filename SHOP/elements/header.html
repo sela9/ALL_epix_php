@@ -4,40 +4,58 @@
 <title>Handbags</title>
 
 <meta charset="utf-8">
-<link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/bootstrap.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="../css/bootstrap-theme.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="../css/shop.css" type="text/css" charset="utf-8">
+
 </head>
 <body>
-  <span>В моей корзине сумочек: <a href=cart.php><?php 
-  //количество сумок в корзине
-   if (isset($_SESSION['cart'])) {
-         $qtt=0;
-         foreach ($_SESSION['cart'] as $key => $value) {
-               $qtt+=$value;
-         }
-         echo $qtt;
-   } else echo 'нет';
-
-  ?></a></span>
-<div id="background">
-
-  <div id="page">
-    <div id="header"> <span id="connect"></span> <span id="infos"></span> <a href="index.php" id="logo"></a>
-      <!-- /#logo -->
-      <ul id="navigation">
-<?php 
-if ($_SERVER['PHP_SELF']=='/SHOP/site/index.php') {
-    echo '<li class="selected"><a href="index.php">Home</a></li>';
-} else echo '<li><a href="index.php">Home</a></li>';
-if ($_SERVER['PHP_SELF']=='/SHOP/site/shop.php') {
-    echo '<li class="selected"><a href="shop.php">Shop</a></li>';
-} else echo '<li><a href="shop.php">Shop</a></li>';
-if ($_SERVER['PHP_SELF']=='/SHOP/site/cart.php') {
-    echo '<li class="selected"><a href="cart.php">Cart</a></li>';
-} else echo '<li><a href="cart.php">Cart</a></li>';
-if ($_SERVER['PHP_SELF']=='/SHOP/site/about.php') {
-    echo '<li class="selected"><a href="about.php">About</a></li>';
-} else echo '<li><a href="about.php">About</a></li>';
-
-?>        
-      </ul>
-    </div>
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Навигация</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.php" style="color: #B52A6E">Гламурненько.рф</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <?php 
+                    if ($_SERVER['PHP_SELF']=='/SHOP/site/index.php') {
+                        echo '<li class="active"><a href="index.php">Home</a></li>';
+                    } else echo '<li><a href="index.php">Home</a></li>';
+                    if ($_SERVER['PHP_SELF']=='/SHOP/site/shop.php') {
+                        echo '<li class="active"><a href="shop.php">Shop</a></li>';
+                    } else echo '<li><a href="shop.php">Shop</a></li>';
+                    if ($_SERVER['PHP_SELF']=='/SHOP/site/cart.php') {
+                        echo '<li class="active"><a href="cart.php">Cart</a></li>';
+                    } else echo '<li><a href="cart.php">Cart</a></li>';
+                    if ($_SERVER['PHP_SELF']=='/SHOP/site/about.php') {
+                        echo '<li class="active"><a href="about.php">About</a></li>';
+                    } else echo '<li><a href="about.php">About</a></li>';
+                ?>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                 <a href="cart.php">В моей корзине сумочек: 
+                      <?php 
+                          //количество сумок в корзине
+                           if (isset($_SESSION['cart'])) {
+                                 $qtt=0;
+                                 foreach ($_SESSION['cart'] as $key => $value) {
+                                       $qtt+=$value;
+                                 }
+                                 echo $qtt;
+                           } else echo 'нет';
+                      ?></a>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
